@@ -1,0 +1,1 @@
+/home/cicin/.emacs.d/
