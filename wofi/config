@@ -1,0 +1,5 @@
+mode=drun
+allow_images=true
+image_size=50
+width=1000
+prompt=Search
