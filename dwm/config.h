@@ -13,13 +13,13 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "JetBrainsMono:size=12", "Noto color Emoji:size=13" };
 static const char dmenufont[]       = "JetBrainsMono:size=12";
-static const char norm_fg[] = "#f5dccf";
-static const char norm_bg[] = "#10111d";
-static const char norm_border[] = "#ab9a90";
+static const char norm_fg[] = "#eacdc1";
+static const char norm_bg[] = "#0C151E";
+static const char norm_border[] = "#a38f87";
 
-static const char sel_fg[] = "#f5dccf";
-static const char sel_bg[] = "#1A99AD";
-static const char sel_border[] = "#f5dccf";
+static const char sel_fg[] = "#eacdc1";
+static const char sel_bg[] = "#CC867D";
+static const char sel_border[] = "#eacdc1";
 
 static const char *colors[][3]      = {
     /*               fg           bg         border                         */
@@ -54,7 +54,7 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
-#define MODKEY Mod1Mask
+#define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -67,7 +67,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", norm_bg, "-nf", norm_fg, "-sb", sel_bg, "-sf", sel_fg, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "kitty", NULL };
 static const char *emacscmd[]  = { "emacsclient", "-c", NULL };
 static const char *exitxcmd[]  = { "pkill", "x", NULL };
 
