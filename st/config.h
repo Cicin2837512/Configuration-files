@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "JetBrainsMono:pixelsize=20:antialias=true:autohint=true";
+static char *font = "CodeNewRoman Nerd Font:pixelsize=23:antialias=true:autohint=true:style=italic";
 static int borderpx = 30;
 
 /*
@@ -95,70 +95,38 @@ unsigned int tabspaces = 4;
 
 
 /* background opacity */
-static const int alpha = 0xee;
+static const int alpha = 0xaa;
 float alphaOffset = 0.9;
 /*float alphaUnfocus;*/
-
-/*
-const char *colorname[] = {
-
-  [0] = "#10111d", /
-  [1] = "#366C93", /
-  [2] = "#1A99AD", /
-  [3] = "#7898B3", /
-  [4] = "#8C9AB4", /
-  [5] = "#A6A1B1", /
-  [6] = "#E0B1B5", /
-  [7] = "#f5dccf", /
-
-  [8]  = "#ab9a90",
-  [9]  = "#366C93",
-  [10] = "#1A99AD",
-  [11] = "#7898B3",
-  [12] = "#8C9AB4",
-  [13] = "#A6A1B1",
-  [14] = "#E0B1B5",
-  [15] = "#f5dccf",
-
-  [256] = "#10111d",
-  [257] = "#f5dccf",
-  [258] = "#f5dccf",
-};
-
- unsigned int defaultbg = 0;
- unsigned int defaultfg = 257;
- unsigned int defaultcs = 258;
- unsigned int defaultrcs= 258;
-*/
-
 
 const char *colorname[] = {
 
   /* 8 normal colors */
-  [0] = "#26273a", /* black   */
-  [1] = "#992261", /* red     */
-  [2] = "#33ff55", /* green   */
-  [3] = "#f4b912", /* yellow  */
-  [4] = "#242B61", /* blue    */
-  [5] = "#5D1D58", /* magenta */
-  [6] = "#3049A1", /* cyan    */
-  [7] = "#CDD6F7", /* white   */
+  [0] = "#403838", /* black   */
+  [1] = "#fd6883", /* red     */
+  [2] = "#adda78", /* green   */
+  [3] = "#f9cc6c", /* yellow  */
+  [4] = "#f38d70", /* blue    */
+  [5] = "#a8a9eb", /* magenta */
+  [6] = "#85dacc", /* cyan    */
+  [7] = "#fff1f3", /* white   */
 
   /* 8 bright colors */
-  [8]  = "#26273a",  /* black   */
-  [9]  = "#992261",  /* red     */
-  [10] = "#33ff55", /* green   */
-  [11] = "#f4b912", /* yellow  */
-  [12] = "#242B61", /* blue    */
-  [13] = "#5D1D58", /* magenta */
-  [14] = "#3049A1", /* cyan    */
-  [15] = "#CDD6F7", /* white   */
+  [8]  = "#72696a",  /* black   */
+  [9]  = "#fd6883",  /* red     */
+  [10] = "#adda78", /* green   */
+  [11] = "#f9cc6c", /* yellow  */
+  [12] = "#f38d70", /* blue    */
+  [13] = "#a8a9eb", /* magenta */
+  [14] = "#85dacc", /* cyan    */
+  [15] = "#fff1f3", /* white   */
 
   /* special colors */
-  [256] = "#040518", /* background */
-  [257] = "#d4add0", /* foreground */
-  [258] = "#d4add0",     /* cursor */
+  [256] = "#212121", /* background */
+  [257] = "#fff1f3", /* foreground */
+  [258] = "#fff1f3",     /* cursor */
 };
+
 
 /* Default colors (colorname index)
  * foreground, background, cursor */
