@@ -1,9 +1,9 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int gappx     = 12;        /* gaps between windows */
-static const unsigned int snap      = 16;       /* snap pixel */
+static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int gappx     = 6;        /* gaps between windows */
+static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayonleft = 0;    /* 0: systray in the right corner, >0: systray on left of status text */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
@@ -11,20 +11,17 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 1;        /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "JetBrainsMono:size=12", "Noto color Emoji:size=13" };
-static const char dmenufont[]       = "JetBrainsMono:size=12";
-static const char norm_fg[] = "#fff1f3";
-static const char norm_bg[] = "#212121";
-static const char norm_border[] = "#adda78";
-
-static const char sel_fg[] = "#212121";
-static const char sel_bg[] = "#a8a9eb";
-static const char sel_border[] = "#fd6883";
-
+static const char *fonts[] = { "CodeNewRoman Nerd Font:size=13", "NotoColorEmoji:pixelsize=12:antialias=true:autohint=true" };
+static const char dmenufont[]       = "CodeNewRoman Nerd Font:size=13";
+static const char col_gray1[]       = "#212121";
+static const char col_gray2[]       = "#444444";
+static const char col_gray3[]       = "#f9cc6c";
+static const char col_gray4[]       = "#212121";
+static const char col_cyan[]        = "#fd6883";
 static const char *colors[][3]      = {
-    /*               fg           bg         border                         */
-    [SchemeNorm] = { norm_fg,     norm_bg,   norm_border }, // unfocused wins
-    [SchemeSel]  = { sel_fg,      sel_bg,    sel_border },  // the focused win
+	/*               fg         bg         border   */
+	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
+	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
 
 /* tagging */
@@ -35,14 +32,18 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Nemo",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	/* class           instance    title                 tags mask          isfloating   monitor */
+	{ "Gimp",          NULL,       NULL,                 0,                 1,           -1 },
+	{ "firefox",       NULL,       NULL,                 1 << 0,            0,           -1 },
+  { "st-256color",   NULL,       NULL,                 1 << 1,            0,           -1 },
+  { "discord",       NULL,       NULL,                 1 << 2,            0,           -1 },
+  { NULL,            NULL,       "cmus v2.10.0",       1 << 3,            0,           -1 },
+  { "Blender",       NULL,       NULL,                 1 << 4,            0,           -1 },
+  { "obs",           NULL,       NULL,                 1 << 5,            0,           -1 },
 };
 
 /* layout(s) */
-static const float mfact     = 0.5; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
@@ -67,18 +68,16 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", norm_bg, "-nf", norm_fg, "-sb", sel_bg, "-sf", sel_fg, "-g", "2", NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char *emacscmd[]  = { "emacsclient", "-c", NULL };
-static const char *exitxcmd[]  = { "pkill", "x", NULL };
-static const char *changeLayoutToCz[]  = { "setxkbmap", "cz", NULL };
-static const char *changeLayoutToUs[]  = { "setxkbmap", "us", NULL };
+static const char *cmus[]  = { "st", "-e", "/bin/zsh", "-c", "'cmus'", NULL };
+static const char *logout[]  = { "pkill", "Xorg", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_Return, spawn,          {.v = emacscmd } },
+	{ MODKEY|ShiftMask,             XK_m,      spawn,          {.v = cmus } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -89,8 +88,6 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
-	{ MODKEY,                       XK_c,      spawn,     {.v = changeLayoutToCz} },
-	{ MODKEY,                       XK_u,      spawn,     {.v = changeLayoutToUs} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
@@ -111,7 +108,7 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,      spawn,          {.v = exitxcmd} },
+	{ MODKEY|ShiftMask,             XK_q,      spawn,          {.v = logout } },
 };
 
 /* button definitions */
