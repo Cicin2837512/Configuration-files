@@ -1,4 +1,3 @@
-#!/bin/bash
 
 # wallpaper
 nitrogen --restore &
@@ -16,10 +15,9 @@ volctl &
 # emacs daemon
 emacs --daemon &
 
-# startup applications
-firefox &
+# startup apps
+firefox & &
 st -e /bin/zsh -c 'tmux attach' &
-discord &
 
 # picom
 picom -b
