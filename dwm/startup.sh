@@ -6,6 +6,7 @@ nitrogen --restore &
 
 # clock, ram usage, cpu usage, etc. (automatically shows up in the dwm bar)
 # slstatus &
+dwmblocks &
 
 # systray stuff
 nm-applet &
